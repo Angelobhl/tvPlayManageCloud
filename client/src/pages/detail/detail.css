@@ -1,0 +1,22 @@
+.detail-page {
+  padding: 20px; }
+
+.form-field-item {
+  margin: 20px 0; }
+  .form-field-item .form-field-item-label {
+    margin: 20px 0; }
+  .form-field-item .form-field-item-content {
+    color: #ccc; }
+
+.left-chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  align-items: center; }
+  .left-chapter-grid .left-chapter-grid-item {
+    color: #333;
+    margin: 10px 0;
+    padding: 20px;
+    width: 100px;
+    border: 1px solid #ccc;
+    text-align: center; }
