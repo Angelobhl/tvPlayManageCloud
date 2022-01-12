@@ -71,8 +71,8 @@ export default class Chapters extends Component {
             openID: openID || ''
           }
         }).then(res => {
-          //     // res.result为resolve返回的值
-          //     // res.result.data为查询的数据，是一个数组；使得用doc().get()，则是一个json
+          // res.result为resolve返回的值
+          // res.result.data为查询的数据，是一个数组；使得用doc().get()，则是一个json
           console.log('pages', res)
 
           const result: platformListsResult = res.result as platformListsResult
