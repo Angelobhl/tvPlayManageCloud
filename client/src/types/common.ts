@@ -51,3 +51,8 @@ export interface WaitingItemAdd {
 export interface WaitingItem extends WaitingItemAdd {
   index: number
 }
+
+export interface platformListsResult {
+  openID: string,
+  list: chapterData[]
+}

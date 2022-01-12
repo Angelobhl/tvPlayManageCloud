@@ -186,22 +186,6 @@ export default class Index extends Component<{}> {
     }
   }
 
-  handleAddClick () {
-    Taro.navigateTo({
-      url: '/pages/add/add'
-    })
-    // Taro.cloud
-    //   .callFunction({
-    //     name: 'platformLists',
-    //     data: {}
-    //   })
-    //   .then(res => {
-    //     // res.result为resolve返回的值
-    //     // res.result.data为查询的数据，是一个数组；使得用doc().get()，则是一个json
-    //     console.log('pages', res)
-    //   })
-  }
-
   handleCalendarRender (source: string, start?: string, end?: string, selectDay?: CalendarDay) {
     const aStart: string[] = start.split('-')
     const aEnd: string[] = end.split('-')
@@ -233,25 +217,10 @@ export default class Index extends Component<{}> {
         <ChapterList ref={this.chapterListRef} />
         <View className="at-row at-row__justify--around" style="margin-bottom: 10px;">
           <View className="at-col at-col-5">
-            <AtButton type="primary" size="small" circle={true} onClick={this.handleAddClick}>添加</AtButton>
-          </View>
-          <View className="at-col at-col-5">
             <AtButton type="primary" size="small" circle={true} onClick={() => { this.handlePageJump('/pages/chapters/chapters') }}>全部剧集</AtButton>
           </View>
-        </View>
-        <View className="at-row at-row__justify--around" style="margin-bottom: 10px;">
-          <View className="at-col at-col-5">
-            <AtButton type="primary" size="small" circle={true} onClick={() => { this.handlePageJump('/pages/import/import') }}>导入</AtButton>
-          </View>
-          <View className="at-col at-col-5">
-            <AtButton type="primary" size="small" circle={true} onClick={() => { this.handlePageJump('/pages/export/export') }}>导出</AtButton>
-          </View>
-        </View>
-        <View className="at-row at-row__justify--around">
           <View className="at-col at-col-5">
             <AtButton type="primary" size="small" circle={true} onClick={() => { this.handlePageJump('/pages/platform/list') }}>剧集平台</AtButton>
-          </View>
-          <View className="at-col at-col-5">
           </View>
         </View>
       </View>

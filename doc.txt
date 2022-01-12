@@ -1,7 +1,7 @@
 数据库：
   platforms
   types
-  tvplayLists
+  typlayLists
 
 触发请求数据库：
   剧集导入（从云端导入）、导出（保存到云端）
