@@ -123,6 +123,12 @@ export default class Chapters extends Component {
     })
   }
 
+  handlePageJump (url: string) {
+    Taro.navigateTo({
+      url: url
+    })
+  }
+
   render () {
     return (
       <View className='chapterList'>
@@ -133,6 +139,14 @@ export default class Chapters extends Component {
           </View>
           <View className="at-col at-col-5">
             <AtButton type="primary" size="small" circle={true} onClick={() => { this.submitToCloud() }}>保存到云端</AtButton>
+          </View>
+        </View>
+        <View className="at-row at-row__justify--around" style="margin-bottom: 10px;">
+          <View className="at-col at-col-5">
+            <AtButton type="primary" size="small" circle={true} onClick={() => { this.handlePageJump('/pages/import/import') }}>文本导入</AtButton>
+          </View>
+          <View className="at-col at-col-5">
+            <AtButton type="primary" size="small" circle={true} onClick={() => { this.handlePageJump('/pages/export/export') }}>文本导出</AtButton>
           </View>
         </View>
         <View className="at-row at-row__justify--around" style="margin-bottom: 10px;">
