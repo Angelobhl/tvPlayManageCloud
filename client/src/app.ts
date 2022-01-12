@@ -1,9 +1,16 @@
 import { Component } from 'react'
+import Taro from '@tarojs/taro'
 import './app.scss'
 
 class App extends Component {
 
-  componentDidMount () {}
+  componentDidMount () {
+    if (process.env.TARO_ENV === 'weapp') {
+      Taro.cloud.init({
+        env: 'cloud1-3gscpohq3da20747'
+      })
+    }
+  }
 
   componentDidShow () {}
 

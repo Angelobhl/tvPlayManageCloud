@@ -10,7 +10,7 @@ cloud.init({
 exports.main = async (event, context) => {
   const db = cloud.database()
 
-  return db.collection('platforms').get().then(res => {
+  return db.collection('platforms').doc('54ad1eea61dd43e105800303362e1273').get().then(res => {
     console.log(res)
 
     return res

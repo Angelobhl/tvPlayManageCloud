@@ -190,6 +190,16 @@ export default class Index extends Component<{}> {
     Taro.navigateTo({
       url: '/pages/add/add'
     })
+    // Taro.cloud
+    //   .callFunction({
+    //     name: 'platformLists',
+    //     data: {}
+    //   })
+    //   .then(res => {
+    //     // res.result为resolve返回的值
+    //     // res.result.data为查询的数据，是一个数组；使得用doc().get()，则是一个json
+    //     console.log('pages', res)
+    //   })
   }
 
   handleCalendarRender (source: string, start?: string, end?: string, selectDay?: CalendarDay) {

@@ -40,5 +40,7 @@
     "showES6CompileOption": false
   },
   "compileType": "miniprogram",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+  "libVersion": "2.14.1",
   "condition": {}
 }
