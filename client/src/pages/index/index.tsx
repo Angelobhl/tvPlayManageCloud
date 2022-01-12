@@ -5,9 +5,9 @@ import { AtButton } from 'taro-ui'
 import Calendar from '../../components/calendar'
 import ChapterList from './chapterList'
 import {CalendarDay} from '../../types/calendar'
-import {chapterData, chapterCalendarItemData, chapterCalendarData, ChapterListItemProp} from '../../types/common'
+import {chapterData, chapterCalendarItemData, chapterCalendarData, ChapterListItemProp, platformListsResult} from '../../types/common'
 import {aPlatform} from '../../util/const'
-import { getStorage, dayArrJoin } from '../../util/common'
+import { getStorage, dayArrJoin, setStorage } from '../../util/common'
 
 let oPlatform = {}
 aPlatform.forEach(item => {
@@ -52,7 +52,7 @@ export default class Index extends Component<{}> {
     this.chapterListRef = createRef()
   }
 
-  componentWillMount () { }
+  componentWillMount () {}
 
   componentDidMount () {
   }
@@ -61,6 +61,7 @@ export default class Index extends Component<{}> {
 
   componentDidShow () {
     const aChapterData: chapterData[] = getStorage<chapterData>('chapter')
+
     if (aChapterData.length) {
       this.aChapterData = aChapterData
       let item: chapterData
@@ -68,6 +69,30 @@ export default class Index extends Component<{}> {
         this.oChapterData['index_' + item.index] = item
       }
       this.fInitChapterData()
+    }
+
+    const openID: string = Taro.getStorageSync('openID')
+    if (!openID) {
+      Taro.cloud.callFunction({
+        name: 'getTvplayList',
+        data: {
+          openID: openID || ''
+        }
+      }).then(res => {
+        const result: platformListsResult = res.result as platformListsResult
+        Taro.setStorageSync('openID', result.openID)
+
+        if (!aChapterData.length && result.list.length) {
+          setStorage<chapterData>('chapter', result.list)
+
+          this.aChapterData = result.list
+          let item: chapterData
+          for (item of this.aChapterData) {
+            this.oChapterData['index_' + item.index] = item
+          }
+          this.fInitChapterData()
+        }
+      })
     }
   }
 
