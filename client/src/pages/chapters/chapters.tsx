@@ -57,22 +57,6 @@ export default class Chapters extends Component {
     this.chapterListRef.current && this.chapterListRef.current.fSetList(aList)
   }
 
-  handleAddClick () {
-    Taro.navigateTo({
-      url: '/pages/add/add'
-    })
-    // Taro.cloud
-    //   .callFunction({
-    //     name: 'platformLists',
-    //     data: {}
-    //   })
-    //   .then(res => {
-    //     // res.result为resolve返回的值
-    //     // res.result.data为查询的数据，是一个数组；使得用doc().get()，则是一个json
-    //     console.log('pages', res)
-    //   })
-  }
-
   handleLoadFromCloud () {
     Taro.showModal({
       title: '提示',
@@ -87,6 +71,8 @@ export default class Chapters extends Component {
             openID: openID || ''
           }
         }).then(res => {
+          //     // res.result为resolve返回的值
+          //     // res.result.data为查询的数据，是一个数组；使得用doc().get()，则是一个json
           console.log('pages', res)
 
           const result: platformListsResult = res.result as platformListsResult
@@ -151,7 +137,7 @@ export default class Chapters extends Component {
         </View>
         <View className="at-row at-row__justify--around" style="margin-bottom: 10px;">
           <View className="at-col at-col-5">
-            <AtButton type="primary" size="small" circle={true} onClick={this.handleAddClick}>添加</AtButton>
+            <AtButton type="primary" size="small" circle={true} onClick={() => { this.handlePageJump('/pages/add/add') }}>添加</AtButton>
           </View>
         </View>
       </View>
