@@ -3,7 +3,7 @@ import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { AtButton } from 'taro-ui'
 import ChapterList from '../index/chapterList'
-import {chapterData, ChapterListItemProp, platformListsResult} from '../../types/common'
+import {chapterData, ChapterListItemProp, tvplayListsResult} from '../../types/common'
 import {aPlatform} from '../../util/const'
 import {getStorage, setStorage} from '../../util/common'
 
@@ -75,7 +75,7 @@ export default class Chapters extends Component {
           // res.result.data为查询的数据，是一个数组；使得用doc().get()，则是一个json
           console.log('pages', res)
 
-          const result: platformListsResult = res.result as platformListsResult
+          const result: tvplayListsResult = res.result as tvplayListsResult
           Taro.setStorageSync('openID', result.openID)
 
           if (result.list.length) {

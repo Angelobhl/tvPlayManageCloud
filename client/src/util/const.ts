@@ -1,7 +1,9 @@
 import {getStorage} from './common'
-import {PlatformItem} from '../types/common'
+import {PlatformItem, TypeItem} from '../types/common'
 
-export const aType = [
+const typesStorage = getStorage<TypeItem>('types')
+
+export const aType: TypeItem[] = typesStorage.length ? typesStorage :  [
   { label: '电视剧', value: 'tvplay' },
   { label: '综艺', value: 'varietyshow' },
   { label: '动漫', value: 'cartoon' },
@@ -10,7 +12,7 @@ export const aType = [
 
 const platformStorage = getStorage<PlatformItem>('platform')
 
-export const aPlatform = platformStorage.length ? platformStorage : [
+export const aPlatform: PlatformItem[] = platformStorage.length ? platformStorage : [
   { label: '爱奇艺', value: 'iqiyi' },
   { label: '腾讯', value: 'tt' },
   { label: '芒果TV', value: 'mgtv' },

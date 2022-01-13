@@ -41,6 +41,11 @@ export interface PlatformItem {
   value: string
 }
 
+export interface TypeItem {
+  label: string,
+  value: string
+}
+
 export interface WaitingItemAdd {
   title: string,
   date: string,
@@ -52,7 +57,7 @@ export interface WaitingItem extends WaitingItemAdd {
   index: number
 }
 
-export interface platformListsResult {
+export interface tvplayListsResult {
   openID: string,
   list: chapterData[]
 }
