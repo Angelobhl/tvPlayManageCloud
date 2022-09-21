@@ -98,6 +98,18 @@ export default class Index extends Component<{}> {
 
   componentDidHide () { }
 
+  onShareAppMessage () {
+    return {
+      title: '追剧小助手'
+    }
+  }
+
+  onShareTimeline () {
+    return {
+      title: '追剧小助手'
+    }
+  }
+
   theDayDate (time: number) {
     const flag: number = 1612108800000
     return time - (time - flag) % 86400000
@@ -212,11 +224,14 @@ export default class Index extends Component<{}> {
   }
 
   handleCalendarRender (source: string, start?: string, end?: string, selectDay?: CalendarDay) {
-    const aStart: string[] = start.split('-')
-    const aEnd: string[] = end.split('-')
+    console.log(source)
+    const aStart: string[] = start ? start.split('-') : []
+    const aEnd: string[] = end ? end.split('-') : []
     this.calendarDayStart = new Date(+aStart[0], +aStart[1] - 1, +aStart[2]).getTime()
     this.calendarDayEnd = new Date(+aEnd[0], +aEnd[1] - 1, +aEnd[2]).getTime()
-    this.selectDay = selectDay
+    if (selectDay) {
+      this.selectDay = selectDay
+    }
     if (this.aChapterData) {
       this.fInitChapterData()
     }

@@ -61,3 +61,8 @@ export interface tvplayListsResult {
   openID: string,
   list: chapterData[]
 }
+
+export interface platformListsResult {
+  openID: string,
+  list: chapterData[]
+}
