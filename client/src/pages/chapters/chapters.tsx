@@ -6,6 +6,7 @@ import ChapterList from '../index/chapterList'
 import {chapterData, ChapterListItemProp, tvplayListsResult} from '../../types/common'
 import {aPlatform} from '../../util/const'
 import {getStorage, setStorage} from '../../util/common'
+import useNavInfo from '../../components/useNavInfo'
 
 import './chapters.scss'
 
@@ -58,6 +59,7 @@ export default class Chapters extends Component {
   }
 
   handleLoadFromCloud () {
+    return false
     Taro.showModal({
       title: '提示',
       content: '确认用云端的剧集列表覆盖本地的剧集列表？'
@@ -88,6 +90,7 @@ export default class Chapters extends Component {
   }
 
   submitToCloud () {
+    return false
     Taro.showModal({
       title: '提示',
       content: '确认用本地的剧集列表覆盖云端的剧集列表？'
@@ -116,17 +119,13 @@ export default class Chapters extends Component {
   }
 
   render () {
+    const useNav = useNavInfo()
+    const bottomStyle = {
+      paddingBottom: useNav.bottomSafeHeight + 'px'
+    }
     return (
-      <View className='chapterList'>
+      <View className='chapterList' style={bottomStyle}>
         <ChapterList ref={this.chapterListRef} />
-        <View className="at-row at-row__justify--around" style="margin-bottom: 10px;">
-          <View className="at-col at-col-5">
-            <AtButton type="primary" size="small" circle={true} onClick={() => { this.handleLoadFromCloud() }}>从云端导入</AtButton>
-          </View>
-          <View className="at-col at-col-5">
-            <AtButton type="primary" size="small" circle={true} onClick={() => { this.submitToCloud() }}>保存到云端</AtButton>
-          </View>
-        </View>
         <View className="at-row at-row__justify--around" style="margin-bottom: 10px;">
           <View className="at-col at-col-5">
             <AtButton type="primary" size="small" circle={true} onClick={() => { this.handlePageJump('/pages/import/import') }}>文本导入</AtButton>

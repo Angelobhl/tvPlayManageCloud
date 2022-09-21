@@ -6,6 +6,7 @@ import { AtForm, AtInput, AtButton, AtRadio, AtCheckbox, AtList, AtListItem, AtI
 import {aType, aPlatform} from '../../util/const'
 import {addState, chapterData, WaitingItem} from '../../types/common'
 import {getStorage, setStorage} from '../../util/common'
+import useNavInfo from '../../components/useNavInfo'
 
 import 'taro-ui/dist/style/components/form.scss' // 按需引入
 import 'taro-ui/dist/style/components/input.scss' // 按需引入
@@ -73,12 +74,12 @@ export default class Add extends Component<{}, addState> {
   componentWillUnmount () { }
 
   componentDidShow () {
-    this.waiting = this.$instance.router.params.waiting ? +this.$instance.router.params.waiting : -1
+    this.waiting = this.$instance.router?.params.waiting ? +this.$instance.router.params.waiting : -1
     console.log(this.waiting)
 
     if (this.waiting > 0) {
       this.aWaitingList = getStorage<WaitingItem>('waiting')
-      let item: WaitingItem
+      let item: WaitingItem | null = null
       let len: number = this.aWaitingList.length
       for (let i = 0; i < len; i++) {
         if (this.aWaitingList[i].index === this.waiting) {
@@ -146,7 +147,7 @@ export default class Add extends Component<{}, addState> {
     })
   }
 
-  handleSubmit (event) {
+  handleSubmit () {
     const curDate = new Date()
     // let fSaveData = this.fSaveData
     let oData: chapterData = {
@@ -222,8 +223,12 @@ export default class Add extends Component<{}, addState> {
   }
 
   render () {
+    const useNav = useNavInfo()
+    const bottomStyle = {
+      paddingBottom: useNav.bottomSafeHeight + 'px'
+    }
     return (
-      <View className="add-page">
+      <View className="add-page" style={bottomStyle}>
         <AtForm>
           <FormField label="剧名">
             <AtInput

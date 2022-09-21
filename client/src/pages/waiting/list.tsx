@@ -5,6 +5,7 @@ import { AtList, AtListItem, AtButton } from "taro-ui"
 import {WaitingItem} from '../../types/common'
 import {aPlatform} from '../../util/const'
 import { getStorage } from '../../util/common'
+import useNavInfo from "../../components/useNavInfo"
 
 let oPlatform = {}
 aPlatform.forEach(item => {
@@ -57,8 +58,12 @@ export default class WaitingList extends React.Component<{}, WaitingListState> {
   }
 
   render () {
+    const useNav = useNavInfo()
+    const bottomStyle = {
+      paddingBottom: useNav.bottomSafeHeight + 'px'
+    }
     return (
-      <View className="waiting-list-page">
+      <View className="waiting-list-page" style={bottomStyle}>
         {
         this.state.aList.length ? (
           <AtList>

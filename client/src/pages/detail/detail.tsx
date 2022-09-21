@@ -5,6 +5,7 @@ import { AtList, AtListItem, AtButton, AtModal, AtModalHeader, AtModalContent, A
 import {aType, aPlatform} from '../../util/const'
 import {chapterData, WaitingItem} from '../../types/common'
 import {getStorage, setStorage, dayArrJoin} from '../../util/common'
+import useNavInfo from '../../components/useNavInfo'
 
 import "taro-ui/dist/style/components/flex.scss"
 import "taro-ui/dist/style/components/modal.scss"
@@ -58,8 +59,8 @@ export default class Detail extends Component<{}, DetailState> {
   componentWillMount () {
     const self = this
 
-    this.index = +this.$instance.router.params.index || 0
-    let chapter: chapterData
+    this.index = this.$instance.router?.params.index ? +this.$instance.router.params.index : 0
+    let chapter: chapterData | null = null
     const aChapterData: chapterData[] = getStorage<chapterData>('chapter')
 
     let item: chapterData
@@ -90,7 +91,7 @@ export default class Detail extends Component<{}, DetailState> {
   componentDidHide () { }
 
   showType () {
-    let str: string
+    let str: string = ''
     let item: {label: string, value: string}
 
     for (item of aType) {
@@ -103,7 +104,7 @@ export default class Detail extends Component<{}, DetailState> {
   }
 
   showPlatform () {
-    let str: string
+    let str: string = ''
     let item: {label: string, value: string}
 
     for (item of aPlatform) {
@@ -302,8 +303,12 @@ export default class Detail extends Component<{}, DetailState> {
   }
 
   render () {
+    const useNav = useNavInfo()
+    const bottomStyle = {
+      paddingBottom: useNav.bottomSafeHeight + 'px'
+    }
     return (
-      <View className="detail-page">
+      <View className="detail-page" style={bottomStyle}>
         <AtModal isOpened={this.state.totalNumModalShow}>
           <AtModalHeader>设置总集数</AtModalHeader>
           <AtModalContent>

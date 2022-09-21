@@ -6,6 +6,7 @@ import { AtForm, AtInput, AtButton, AtRadio, AtList, AtListItem } from 'taro-ui'
 import {WaitingItem} from '../../types/common'
 import {aPlatform, aType} from '../../util/const'
 import { getStorage, setStorage } from '../../util/common'
+import useNavInfo from "../../components/useNavInfo"
 
 import "taro-ui/dist/style/components/flex.scss"
 import 'taro-ui/dist/style/components/form.scss' // 按需引入
@@ -45,7 +46,7 @@ export default class WaitingForm extends React.Component<{}, WaitingItem> {
     this.aList = getStorage<WaitingItem>('waiting')
 
     let item: WaitingItem = {
-      index: +this.$instance.router.params.index || 0,
+      index: this.$instance.router?.params.index ? +this.$instance.router?.params.index : 0,
       title: '',
       date: '',
       type: '',
@@ -151,8 +152,12 @@ export default class WaitingForm extends React.Component<{}, WaitingItem> {
   }
 
   render () {
+    const useNav = useNavInfo()
+    const bottomStyle = {
+      paddingBottom: useNav.bottomSafeHeight + 'px'
+    }
     return (
-      <View className="waiting-form-page">
+      <View className="waiting-form-page" style={bottomStyle}>
         <AtForm>
           <FormField label="剧名">
             <AtInput

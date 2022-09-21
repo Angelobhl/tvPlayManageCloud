@@ -71,28 +71,30 @@ export default class Index extends Component<{}> {
       this.fInitChapterData()
     }
 
-    const openID: string = Taro.getStorageSync('openID')
-    if (!openID) {
-      Taro.cloud.callFunction({
-        name: 'getTvplayList',
-        data: {
-          openID: openID || ''
-        }
-      }).then(res => {
-        const result: platformListsResult = res.result as platformListsResult
-        Taro.setStorageSync('openID', result.openID)
-
-        if (!aChapterData.length && result.list.length) {
-          setStorage<chapterData>('chapter', result.list)
-
-          this.aChapterData = result.list
-          let item: chapterData
-          for (item of this.aChapterData) {
-            this.oChapterData['index_' + item.index] = item
+    if (false) {
+      const openID: string = Taro.getStorageSync('openID')
+      if (!openID) {
+        Taro.cloud.callFunction({
+          name: 'getTvplayList',
+          data: {
+            openID: openID || ''
           }
-          this.fInitChapterData()
-        }
-      })
+        }).then(res => {
+          const result: platformListsResult = res.result as platformListsResult
+          Taro.setStorageSync('openID', result.openID)
+
+          if (!aChapterData.length && result.list.length) {
+            setStorage<chapterData>('chapter', result.list)
+
+            this.aChapterData = result.list
+            let item: chapterData
+            for (item of this.aChapterData) {
+              this.oChapterData['index_' + item.index] = item
+            }
+            this.fInitChapterData()
+          }
+        })
+      }
     }
   }
 

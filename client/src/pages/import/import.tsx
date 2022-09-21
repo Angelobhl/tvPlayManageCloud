@@ -1,8 +1,9 @@
 import { Component } from 'react'
 import Taro from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { AtButton, AtTextarea } from 'taro-ui'
 import {setStorage} from '../../util/common'
+import useNavInfo from '../../components/useNavInfo'
 
 import "taro-ui/dist/style/components/flex.scss"
 import "taro-ui/dist/style/components/button.scss" // 按需引入
@@ -62,8 +63,12 @@ export default class Import extends Component<{}, ImportState> {
   }
 
   render () {
+    const useNav = useNavInfo()
+    const bottomStyle = {
+      paddingBottom: useNav.bottomSafeHeight + 'px'
+    }
     return (
-      <View className='import'>
+      <View className='import' style={bottomStyle}>
         <View className="at-row at-row__justify--around" style="margin-bottom: 10px;">
           <View className="at-col at-col-11">
             <AtTextarea

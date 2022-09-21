@@ -4,6 +4,7 @@ import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 import {chapterData} from '../../types/common'
 import {getStorage} from '../../util/common'
+import useNavInfo from '../../components/useNavInfo'
 
 import "taro-ui/dist/style/components/flex.scss"
 import "taro-ui/dist/style/components/button.scss" // 按需引入
@@ -46,8 +47,12 @@ export default class Export extends Component<{}, ExportState> {
   }
 
   render () {
+    const useNav = useNavInfo()
+    const bottomStyle = {
+      paddingBottom: useNav.bottomSafeHeight + 'px'
+    }
     return (
-      <View className='export'>
+      <View className='export' style={bottomStyle}>
         <View className="at-row at-row__justify--around" style="margin-bottom: 10px;">
           <View className="at-col at-col-11">
             <View style="word-break: break-all;white-space: pre-line;">{this.state.chapterJSON}</View>

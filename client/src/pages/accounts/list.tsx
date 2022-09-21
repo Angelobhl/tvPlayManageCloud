@@ -3,6 +3,7 @@ import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import {AccountItem} from '../../types/accounts'
 import { AtButton, AtList, AtListItem } from 'taro-ui'
+import useNavInfo from '../../components/useNavInfo'
 
 import "taro-ui/dist/style/components/flex.scss"
 import "taro-ui/dist/style/components/button.scss" // 按需引入
@@ -68,8 +69,12 @@ export default class AccountList extends Component<{}, AccountsListState> {
   }
 
   render () {
+    const useNav = useNavInfo()
+    const bottomStyle = {
+      paddingBottom: useNav.bottomSafeHeight + 'px'
+    }
     return (
-      <View className='account-list'>
+      <View className='account-list' style={bottomStyle}>
         <View style="margin: 10px;">
         {
           this.state.lists.length ? (

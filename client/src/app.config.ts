@@ -1,6 +1,6 @@
 export default {
   pages: [
-    'pages/launch/index',
+    // 'pages/launch/index',
     'pages/index/index',
     'pages/chapters/chapters',
     'pages/add/add',
@@ -30,5 +30,5 @@ export default {
     navigationBarBackgroundColor: '#fff',
     navigationBarTextStyle: 'black'
   },
-  entryPagePath: 'pages/launch/index'
+  entryPagePath: 'pages/index/index'
 }
